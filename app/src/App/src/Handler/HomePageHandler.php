@@ -46,35 +46,20 @@ class HomePageHandler implements RequestHandlerInterface
         $data = [];
 
         switch ($this->containerName) {
-            case PimpleContainer::class:
-                $data['containerName'] = 'Pimple';
-                $data['containerDocs'] = 'https://pimple.symfony.com/';
-                break;
             case ServiceManager::class:
                 $data['containerName'] = 'Laminas Servicemanager';
                 $data['containerDocs'] = 'https://docs.laminas.dev/laminas-servicemanager/';
-                break;
-            case ContainerBuilder::class:
-                $data['containerName'] = 'Symfony DI Container';
-                $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
                 break;
             case 'Elie\PHPDI\Config\ContainerWrapper':
             case PHPDIContainer::class:
                 $data['containerName'] = 'PHP-DI';
                 $data['containerDocs'] = 'http://php-di.org';
                 break;
-            case MinimalContainer::class:
-                $data['containerName'] = 'Chubbyphp Container';
-                $data['containerDocs'] = 'https://github.com/chubbyphp/chubbyphp-container';
-                break;
         }
 
         if ($this->router instanceof Router\FastRouteRouter) {
             $data['routerName'] = 'FastRoute';
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
-        } elseif ($this->router instanceof Router\LaminasRouter) {
-            $data['routerName'] = 'Laminas Router';
-            $data['routerDocs'] = 'https://docs.laminas.dev/laminas-router/';
         }
 
         if ($this->template === null) {
