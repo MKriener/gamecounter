@@ -1,0 +1,5 @@
+logs/nginx/*
+.env
+docker/php-fpm/xdebug.ini
+docker/database/data/*
+docker/database/init.sql
