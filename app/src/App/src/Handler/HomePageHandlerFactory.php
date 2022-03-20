@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use Doctrine\DBAL\Connection;
 use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
@@ -24,6 +25,6 @@ class HomePageHandlerFactory
             : null;
         assert($template instanceof TemplateRendererInterface || null === $template);
 
-        return new HomePageHandler(get_class($container), $router, $template);
+        return new HomePageHandler($container::class, $router, $container, $container->get(Connection::class), $template);
     }
 }

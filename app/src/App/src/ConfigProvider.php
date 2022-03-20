@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
+//use Doctrine\DBAL\Driver\Connection;
+//use GameCounter\Database\ConnectionFactory;
+use App\Database\ConnectionFactory;
+use Doctrine\DBAL\Connection;
+
 /**
  * The configuration provider for the App module
  *
@@ -36,6 +41,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                Connection::class => ConnectionFactory::class,
             ],
         ];
     }

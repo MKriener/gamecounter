@@ -6,6 +6,7 @@ namespace App\Handler;
 
 use Chubbyphp\Container\MinimalContainer;
 use DI\Container as PHPDIContainer;
+use Doctrine\DBAL\Connection;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\ServiceManager;
@@ -15,6 +16,7 @@ use Mezzio\Router;
 use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\TwigRenderer;
 use Pimple\Psr11\Container as PimpleContainer;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -22,28 +24,24 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class HomePageHandler implements RequestHandlerInterface
 {
-    /** @var string */
-    private $containerName;
-
-    /** @var Router\RouterInterface */
-    private $router;
-
-    /** @var null|TemplateRendererInterface */
-    private $template;
-
     public function __construct(
-        string $containerName,
-        Router\RouterInterface $router,
-        ?TemplateRendererInterface $template = null
+        private readonly string $containerName,
+        private readonly Router\RouterInterface $router,
+        private readonly ContainerInterface $container,
+        private readonly Connection $connection,
+        private readonly ?TemplateRendererInterface $template = null,
     ) {
-        $this->containerName = $containerName;
-        $this->router        = $router;
-        $this->template      = $template;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = [];
+
+        $this->connection->fetchOne(
+            <<<'SQL'
+                    SELECT 1;
+                SQL
+        );
 
         switch ($this->containerName) {
             case ServiceManager::class:
@@ -66,7 +64,7 @@ class HomePageHandler implements RequestHandlerInterface
             return new JsonResponse([
                 'welcome' => 'Congratulations! You have installed the mezzio skeleton application.',
                 'docsUrl' => 'https://docs.mezzio.dev/mezzio/',
-            ] + $data);
+            ] + $data + $this->container->get('config'));
         }
 
         if ($this->template instanceof PlatesRenderer) {
