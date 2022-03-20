@@ -47,6 +47,7 @@
         "elie29/zend-phpdi-config": "v8.1.1",
         "laminas/laminas-component-installer": "^2.6",
         "laminas/laminas-config-aggregator": "^1.6",
+        "laminas/laminas-db": "^2.13",
         "laminas/laminas-diactoros": "^2.7",
         "laminas/laminas-servicemanager": "^3.4",
         "laminas/laminas-stdlib": "^3.6",
