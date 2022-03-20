@@ -1,0 +1,9 @@
+parameters:
+	level: 7
+	paths:
+		- src
+		- test
+
+	tmpDir: var/cache
+
+	checkGenericClassInNonGenericObjectType: false
