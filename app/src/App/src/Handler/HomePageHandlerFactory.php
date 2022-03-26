@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use Doctrine\DBAL\Connection;
 use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 use function assert;
-use function get_class;
 
 class HomePageHandlerFactory
 {
@@ -23,8 +21,8 @@ class HomePageHandlerFactory
         $template = $container->has(TemplateRendererInterface::class)
             ? $container->get(TemplateRendererInterface::class)
             : null;
-        assert($template instanceof TemplateRendererInterface || null === $template);
+        assert($template instanceof TemplateRendererInterface || $template === null);
 
-        return new HomePageHandler($container::class, $router, $container, $container->get(Connection::class), $template);
+        return new HomePageHandler($container::class, $router, $template);
     }
 }

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use Chubbyphp\Container\MinimalContainer;
 use DI\Container as PHPDIContainer;
-use Doctrine\DBAL\Connection;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\ServiceManager;
@@ -15,20 +13,15 @@ use Mezzio\Plates\PlatesRenderer;
 use Mezzio\Router;
 use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\TwigRenderer;
-use Pimple\Psr11\Container as PimpleContainer;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class HomePageHandler implements RequestHandlerInterface
 {
     public function __construct(
         private readonly string $containerName,
         private readonly Router\RouterInterface $router,
-        private readonly ContainerInterface $container,
-        private readonly Connection $connection,
         private readonly ?TemplateRendererInterface $template = null,
     ) {
     }
@@ -36,12 +29,6 @@ class HomePageHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = [];
-
-        $this->connection->fetchOne(
-            <<<'SQL'
-                    SELECT 1;
-                SQL
-        );
 
         switch ($this->containerName) {
             case ServiceManager::class:
@@ -64,7 +51,7 @@ class HomePageHandler implements RequestHandlerInterface
             return new JsonResponse([
                 'welcome' => 'Congratulations! You have installed the mezzio skeleton application.',
                 'docsUrl' => 'https://docs.mezzio.dev/mezzio/',
-            ] + $data + $this->container->get('config'));
+            ] + $data);
         }
 
         if ($this->template instanceof PlatesRenderer) {
