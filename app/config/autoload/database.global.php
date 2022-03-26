@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 return [
     'doctrine' => [
         'migrations' => [
@@ -25,7 +28,7 @@ return [
             'params' => [
                 'driver' => 'pdo_mysql',
                 'url' => getenv('DATABASE_URL'),
-            ]
-        ]
+            ],
+        ],
     ],
 ];

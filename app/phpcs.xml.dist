@@ -17,9 +17,15 @@
     <file>test</file>
     <exclude-pattern>config/config.php</exclude-pattern>
     <exclude-pattern>config/routes.php</exclude-pattern>
+    <exclude-pattern>src/*/src/ConfigProvider.php</exclude-pattern>
 
-    <!-- Include all rules from the Laminas Coding Standard -->
-    <rule ref="LaminasCodingStandard"/>
+    <rule ref="Squiz.Arrays.ArrayDeclaration.DoubleArrowNotAligned">
+        <severity>5</severity>
+    </rule>
+    <rule ref="Doctrine">
+        <exclude name="SlevomatCodingStandard.Classes.SuperfluousAbstractClassNaming.SuperfluousPrefix"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn.UselessIfCondition"/>
+    </rule>
 
     <rule ref="Squiz.Classes.ClassFileName.NoMatch">
         <exclude-pattern>src/ConfigProvider.*.php</exclude-pattern>

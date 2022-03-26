@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
 $container = require __DIR__ . '/../config/container.php';
 assert($container instanceof ContainerInterface);
 
-$conn = $container->get(Connection::class);
+$conn   = $container->get(Connection::class);
 $config = $container->get('config')['doctrine']['migrations'];
 
 return DependencyFactory::fromConnection(new ConfigurationArray($config), new ExistingConnection($conn));
