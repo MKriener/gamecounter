@@ -5,7 +5,7 @@ services:
     build:
       context: docker/database
     environment:
-      - MYSQL_DATABASE=${DATABASE_NAME}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
@@ -22,11 +22,7 @@ services:
       - db
     environment:
       - APP_ENV=${APP_ENV}
-      - DATABASE_URL=mysql://${MARIADB_USER}:${MARIADB_PASSWORD}@db:3306/${DATABASE_NAME}?serverVersion=mariadb-10.5.9
-      - DATABASE_NAME=${DATABASE_NAME}
-      - MARIADB_USER=${MARIADB_USER}
-      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - DATABASE_URL=mysql://${MARIADB_USER}:${MARIADB_PASSWORD}@db:${DB_PORT}/${MARIADB_DATABASE}?serverVersion=${DB_VERSION}
     volumes:
       - ./:/var/www
       - ./docker/php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

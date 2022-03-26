@@ -23,8 +23,6 @@ return [
         ],
         'connection' => [
             'params' => [
-                'charset' => 'utf8mb4',
-                'serverVersion' => '10.7.3',
                 'driver' => 'pdo_mysql',
                 'url' => getenv('DATABASE_URL'),
             ]

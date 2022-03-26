@@ -56,7 +56,8 @@
         "mezzio/mezzio": "^3.7",
         "mezzio/mezzio-fastroute": "^3.0.3",
         "mezzio/mezzio-helpers": "^5.7",
-        "phpstan/phpstan": "^1.4"
+        "phpstan/phpstan": "^1.4",
+        "symfony/console": "^6.0"
     },
     "require-dev": {
         "laminas/laminas-development-mode": "^3.3.0",
