@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "dadbc115-5842-44fe-b539-2261d89a13af",
+		"name": "GameCounter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "IDEKEY",
+						"value": "PHPSTORM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Flügelschlag1\",\r\n    \"playerMin\": 12,\r\n    \"playerMax\": 12,\r\n    \"description\": \"test\",\r\n    \"startAge\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/game/create?XDEBUG_SESSION_START=PHPSTORM",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"game",
+						"create"
+					],
+					"query": [
+						{
+							"key": "XDEBUG_SESSION_START",
+							"value": "PHPSTORM"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Underwatercity\",\r\n    \"playerMin\": 12,\r\n    \"playerMax\": 12,\r\n    \"description\": \"test\",\r\n    \"startAge\": 12,\r\n    \"played\": 3,\r\n    \"playedLast\": \"2022-05-22\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/game/update?XDEBUG_SESSION_START=PHPSTORM",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"game",
+						"update"
+					],
+					"query": [
+						{
+							"key": "XDEBUG_SESSION_START",
+							"value": "PHPSTORM"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Played",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Flügelschlag\",\r\n    \"played\": 1,\r\n    \"playedLast\": \"2022-05-22\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/game/played?XDEBUG_SESSION_START=PHPSTORM",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"game",
+						"played"
+					],
+					"query": [
+						{
+							"key": "XDEBUG_SESSION_START",
+							"value": "PHPSTORM"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Games",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Flügelschlag\",\r\n    \"played\": 4,\r\n    \"playerMin\": 12,\r\n    \"playerMax\": 12,\r\n    \"playedLast\": \"2022-05-22\",\r\n    \"startAge\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/games/read",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"games",
+						"read"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/game/Flügelschlag",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"game",
+						"Flügelschlag"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/game/Flügelschlag1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"game",
+						"Flügelschlag1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "mkr",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "mkr",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
