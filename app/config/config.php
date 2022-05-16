@@ -14,6 +14,12 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Mezzio\Authentication\Basic\ConfigProvider::class,
+    \Mezzio\Authentication\ConfigProvider::class,
+    \Laminas\I18n\ConfigProvider::class,
+    \Laminas\InputFilter\ConfigProvider::class,
+    \Laminas\Filter\ConfigProvider::class,
+    \Laminas\Validator\ConfigProvider::class,
     \Laminas\Db\ConfigProvider::class,
     // Include cache configuration
     new ArrayProvider($cacheConfig),
@@ -21,13 +27,6 @@ $aggregator = new ConfigAggregator([
     \Mezzio\ConfigProvider::class,
     \Mezzio\Router\ConfigProvider::class,
     \Laminas\Diactoros\ConfigProvider::class,
-
-    // Swoole config to overwrite some services (if installed)
-    class_exists(\Mezzio\Swoole\ConfigProvider::class)
-        ? \Mezzio\Swoole\ConfigProvider::class
-        : function (): array {
-            return [];
-        },
 
     // Default App module config
     App\ConfigProvider::class,
