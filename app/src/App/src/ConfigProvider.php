@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App;
 
 use App\Database\ConnectionFactory;
+use App\Handler\Authorization\AuthenticationMiddleware;
+use App\Handler\Authorization\UserRepository;
 use App\Handler\Game\Create\GameCreateHandler;
 use App\Handler\Game\Create\GameCreateInputFilter;
 use App\Handler\Game\Create\GameCreateMiddleware;
@@ -24,9 +26,11 @@ use App\Handler\Game\Update\GamePlayedMiddleware;
 use App\Handler\Game\Update\GameUpdateHandler;
 use App\Handler\Game\Update\GameUpdateInputFilter;
 use App\Handler\Game\Update\GameUpdateMiddleware;
+use App\Handler\PingHandler;
 use Doctrine\DBAL\Connection;
 use Laminas\InputFilter\InputFilterPluginManager;
 use Psr\Container\ContainerInterface;
+use Whoops\Handler\Handler;
 
 /**
  * The configuration provider for the App module
@@ -59,7 +63,8 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Handler\PingHandler::class => Handler\PingHandler::class,
+                PingHandler::class => PingHandler::class,
+                UserRepository::class => UserRepository::class,
             ],
             'factories'  => [
                 Connection::class              => ConnectionFactory::class,

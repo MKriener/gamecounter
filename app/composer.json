@@ -58,6 +58,7 @@
         "laminas/laminas-stdlib": "^3.6",
         "laminas/laminas-validator": "^2.17",
         "mezzio/mezzio": "^3.7",
+        "mezzio/mezzio-authentication-basic": "^1.4",
         "mezzio/mezzio-fastroute": "^3.0.3",
         "mezzio/mezzio-helpers": "^5.7",
         "phpstan/phpstan": "^1.4",

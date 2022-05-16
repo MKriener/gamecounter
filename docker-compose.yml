@@ -23,6 +23,8 @@ services:
     environment:
       - APP_ENV=${APP_ENV}
       - DATABASE_URL=mysql://${MARIADB_USER}:${MARIADB_PASSWORD}@db:${DB_PORT}/${MARIADB_DATABASE}?serverVersion=${DB_VERSION}
+      - LOGIN=${LOGIN}
+      - PW=${PW}
     volumes:
       - ./:/var/www
       - ./docker/php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
