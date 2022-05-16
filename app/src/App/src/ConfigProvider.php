@@ -61,7 +61,6 @@ class ConfigProvider
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
-                Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
                 Connection::class              => ConnectionFactory::class,
 
                 GameCreateMiddleware::class => static fn (ContainerInterface $container) => new GameCreateMiddleware(
