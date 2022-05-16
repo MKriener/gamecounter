@@ -40,12 +40,13 @@ class ConfigProvider
      *
      * To add a bit of a structure, each section is defined in a separate
      * method which returns an array with its configuration.
+     *
+     * @return mixed[]
      */
     public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
         ];
     }
 
@@ -61,7 +62,6 @@ class ConfigProvider
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
-                Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
                 Connection::class              => ConnectionFactory::class,
 
                 GameCreateMiddleware::class => static fn (ContainerInterface $container) => new GameCreateMiddleware(
@@ -106,22 +106,6 @@ class ConfigProvider
                 GameRemover::class => static fn(ContainerInterface $container) => new GameRemover(
                     $container->get(Connection::class)
                 ),
-            ],
-        ];
-    }
-
-    /**
-     * Returns the templates configuration
-     *
-     * @return mixed[]
-     */
-    public function getTemplates(): array
-    {
-        return [
-            'paths' => [
-                'app'    => [__DIR__ . '/../templates/app'],
-                'error'  => [__DIR__ . '/../templates/error'],
-                'layout' => [__DIR__ . '/../templates/layout'],
             ],
         ];
     }
