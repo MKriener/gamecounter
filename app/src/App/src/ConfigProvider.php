@@ -63,6 +63,49 @@ class ConfigProvider
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
                 Connection::class              => ConnectionFactory::class,
+
+                GameCreateMiddleware::class => static fn (ContainerInterface $container) => new GameCreateMiddleware(
+                        $container->get(InputFilterPluginManager::class)->get(GameCreateInputFilter::class)
+                ),
+                GameCreateHandler::class => static fn (ContainerInterface $container) => new GameCreateHandler(
+                        $container->get(GamePersister::class),
+                        $container->get(GameRepository::class),
+                ),
+                GamePlayedMiddleware::class => static fn (ContainerInterface $container) => new GamePlayedMiddleware(
+                    $container->get(InputFilterPluginManager::class)->get(GamePlayedInputFilter::class)
+                ),
+                GamePlayedHandler::class => static fn (ContainerInterface $container) => new GamePlayedHandler(
+                    $container->get(GameRepository::class),
+                    $container->get(GamePersister::class),
+                ),
+                GameUpdateMiddleware::class => static fn (ContainerInterface $container) => new GameUpdateMiddleware(
+                    $container->get(InputFilterPluginManager::class)->get(GameUpdateInputFilter::class)
+                ),
+                GameUpdateHandler::class => static fn (ContainerInterface $container) => new GameUpdateHandler(
+                    $container->get(GameRepository::class),
+                    $container->get(GamePersister::class),
+                ),
+                GamesReadHandler::class => static fn (ContainerInterface $container) => new GamesReadHandler(
+                    $container->get(GameRepository::class)
+                ),
+                GamesReadMiddleware::class => static fn (ContainerInterface $container) => new GamesReadMiddleware(
+                    $container->get(InputFilterPluginManager::class)->get(GamesReadInputFilter::class)
+                ),
+                GameReadHandler::class => static fn(ContainerInterface $container) => new GameReadHandler(
+                    $container->get(GameRepository::class)
+                ),
+                GameDeleteHandler::class => static fn(ContainerInterface $container) => new GameDeleteHandler(
+                    $container->get(GameRemover::class)
+                ),
+                GamePersister::class => static fn (ContainerInterface $container) => new GamePersister(
+                        $container->get(Connection::class)
+                ),
+                GameRepository::class => static fn(ContainerInterface $container) => new GameRepository(
+                    $container->get(Connection::class)
+                ),
+                GameRemover::class => static fn(ContainerInterface $container) => new GameRemover(
+                    $container->get(Connection::class)
+                ),
             ],
         ];
     }
